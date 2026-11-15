@@ -1,0 +1,11 @@
+/* Hide the browser's right-side scrollbar without disabling native scroll. */
+html, body {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* Legacy Edge */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;             /* Chrome / Safari / Edge */
+  width: 0;
+  height: 0;
+}
