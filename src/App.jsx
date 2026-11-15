@@ -72,6 +72,14 @@ export default function App() {
   const inPortal = progress >= NEXUS_END && progress < EIA_START;
   const inEIA = progress >= EIA_START;
   const intro = introductionAt(nexusProgress);
+  const brandOpacity = Math.max(
+  0,
+  Math.min(
+    1,
+    (nexusProgress - 0.17) / 0.04,
+    (INTRO_END - nexusProgress) / 0.055
+  )
+);
   const stationCount = TOUR_ORDER.length;
   const visitPosition = inTour
     ? Math.min(stationCount, Math.floor(((nexusProgress - INTRO_END) / (1 - INTRO_END)) * stationCount) + 1)
@@ -94,11 +102,17 @@ export default function App() {
         </div>
       </header>}
 
-      {inRoom && !inPortal && <div className="fraud-brand" aria-label="FRAUD-X Command Centre">
-        <span>FINANCIAL SECURITY INTELLIGENCE</span>
-        <strong>FRAUD<span>—X</span></strong>
-        <small>NEXUS-9 / {stationCount} CRYSTAL SYSTEMS</small>
-      </div>}
+       {inRoom && !inPortal && nexusProgress < INTRO_END && (
+  <div
+    className="fraud-brand"
+    style={{ opacity: brandOpacity }}
+    aria-label="FRAUD-X Command Centre"
+  >
+    <span>FINANCIAL SECURITY INTELLIGENCE</span>
+    <strong>FRAUD<span>—X</span></strong>
+    <small>NEXUS-9 / {stationCount} CRYSTAL SYSTEMS</small>
+  </div>
+)}
 
       {!inTour && !inPortal && !inEIA && <div className="story-content" aria-live="polite">
         <div className="story-inner" key={intro.tag}>
