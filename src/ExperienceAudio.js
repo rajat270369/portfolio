@@ -1,4 +1,4 @@
-const RESUME_TICK_VOLUME = 0.018;
+const RESUME_TICK_VOLUME = 0.058;
 
 class ExperienceAudio {
   constructor() {
